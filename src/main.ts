@@ -1,6 +1,8 @@
 import Fastify from 'fastify';
 import { app } from './app/app';
+import { PrismaClient } from '@prisma/client'
 
+const prisma = new PrismaClient()
 const host = process.env.HOST ?? 'localhost';
 const port = process.env.PORT ? Number(process.env.PORT) : 3333;
 
@@ -13,11 +15,13 @@ const server = Fastify({
 server.register(app);
 
 // Start listening.
-server.listen({ port, host }, (err) => {
+server.listen({ port, host }, async (err) => {
   if (err) {
     server.log.error(err);
     process.exit(1);
   } else {
-    console.log(`[ ready ] http://${host}:${port}`);
+    await prisma.$connect();
+    console.log(`😊 Successfully connected to DB`)
+	  console.log(`⚡️ Server is running at port ${port}`);
   }
 });
