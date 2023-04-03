@@ -3,7 +3,8 @@ import { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify';
 import AutoLoad from '@fastify/autoload';
 
 /* eslint-disable-next-line */
-export interface AppOptions {}
+export interface AppOptions {
+}
 
 export async function app(fastify: FastifyInstance, opts: AppOptions) {
   // Place here your custom code!

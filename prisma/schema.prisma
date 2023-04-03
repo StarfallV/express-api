@@ -3,6 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["filteredRelationCount"]
 }
 
 datasource db {
@@ -25,7 +26,7 @@ model Article {
 
 model Topic {
   id              Int           @id @default(autoincrement())
-  name            String        @db.VarChar(64)
+  name            String        @db.VarChar(64) @unique
 
   article         Article[]
 }

@@ -1,0 +1,28 @@
+export enum SortOrder {
+	ASCENDING = 'asc',
+	DESCENDING = 'desc'
+}
+
+export enum ArticleStatus {
+	DRAFT = 0,
+	PUBLISHED = 1,
+	DELETED = 9
+}
+
+export enum PrismaError {
+	IS_UNIQUE = 'P2002',
+	FOREIGN_KEY_CONSTRAINT_FAILED = 'P2003',
+	RECORD_NOT_FOUND = 'P2025'
+}
+
+export enum HTTPStatus {
+	OK = 200,
+	CREATED = 201,
+	NO_CONTENT = 204,
+	UNAUTHORIZED = 401,
+	FORBIDDEN = 403,
+	NOT_FOUND = 404,
+	CONFLICT = 409,
+	UNPROCESSABLE_ENTITY = 422,
+	INTERNAL_SERVER_ERROR = 500
+}
