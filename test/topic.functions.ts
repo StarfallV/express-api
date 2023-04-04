@@ -22,7 +22,6 @@ export async function updateTopicName(topic: GetTopic, ctx: Context) {
   })
 }
 
-
 interface GetTopic {
   id: number
 }

@@ -28,3 +28,44 @@ export async function createArticle(article: CreateArticle, ctx: Context) {
     }
   });
 }
+
+interface updateArticle {
+  id: number,
+  title: string,
+  topic: { name: string }[]
+}
+
+export async function updateArticleTitleAndTopics(article: updateArticle, ctx: Context) {
+  return await ctx.prisma.article.update({
+    data: {
+      title: article.title,
+      topic: {
+        set: [],
+        connectOrCreate: article.topic.map((topic) => {
+          return {
+            where: { name: topic.name },
+            create: { name: topic.name }
+          }
+        })
+      }
+    },
+    where: {
+      id: +article.id
+    }
+  });
+}
+
+interface deleteArticle {
+  id: number
+}
+
+export async function deleteArticle(article: deleteArticle, ctx: Context) {
+  return await ctx.prisma.article.update({
+    data: {
+      status: 9
+    },
+    where: {
+      id: +article.id
+    }
+  });
+}
