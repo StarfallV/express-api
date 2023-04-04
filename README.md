@@ -2,7 +2,7 @@
 # REST API for News and Topic Management
 
 ## Installation setups
-​1. Make sure you have Node.js (app built in v18) and PostgreSQL (version 14) Installed in your workspace
+1. Make sure you have Node.js (app built in v18) and PostgreSQL (version 14) Installed in your workspace
 2. Clone this repository
 3. Do `npm install` using terminal
 4. Create an environment file `.env` using the example `.env-example` (terminal command: `cp .env.example .env`)
