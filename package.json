@@ -1,7 +1,9 @@
 {
   "name": "zot-test-api",
   "version": "0.0.0",
+  "description": "Zero One Technology's skill tests",
   "license": "MIT",
+  "author": "StarfallV",
   "scripts": {
     "start": "nx serve",
     "build": "nx build",
