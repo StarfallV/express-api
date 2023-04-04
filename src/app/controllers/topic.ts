@@ -5,7 +5,8 @@ import { HTTPStatus, PrismaError } from '../types';
 const prisma: PrismaClient = new PrismaClient();
 
 export async function getTopics(req: FastifyRequest, res: FastifyReply) {
-    const name = req.query["name"];
+    const query = req.query as any;
+    const name = query["name"];
 
     try {
         const topics = await prisma.topic.findMany({
@@ -28,7 +29,8 @@ export async function getTopics(req: FastifyRequest, res: FastifyReply) {
 }
 
 export async function getTopic(req: FastifyRequest, res: FastifyReply) {
-    const id = req.params["id"];
+    const params = req.params as any;
+    const id = params["id"];
 
     try {
         const topic = await prisma.topic.findUnique({
@@ -78,7 +80,8 @@ export async function createTopic(req: FastifyRequest, res: FastifyReply) {
 }
 
 export async function updateTopic(req: FastifyRequest, res: FastifyReply) {
-    const id = req.params["id"];
+    const params = req.params as any;
+    const id = params["id"];
     const data = req.body as any;
 
     try {
@@ -108,7 +111,8 @@ export async function updateTopic(req: FastifyRequest, res: FastifyReply) {
 }
 
 export async function deleteTopic(req: FastifyRequest, res: FastifyReply) {
-    const id = req.params["id"];
+    const params = req.params as any;
+    const id = params["id"];
 
     try {
         const topic = await prisma.topic.delete({

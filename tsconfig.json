@@ -13,8 +13,7 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "esModuleInterop": true,
-    "strictNullChecks": true
+    "esModuleInterop": true
   },
   "files": [],
   "include": [],
