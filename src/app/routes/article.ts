@@ -31,6 +31,13 @@ export default async function (fastify: FastifyInstance) {
     controller.updateArticle
   )
 
+  //PATCH Article: /article/{id}
+  //Publish Article by ID
+  fastify.patch(
+    `/${route}/:id`,
+    controller.publishArticle
+  )
+
   //DELETE Article: /article/{id}
   //Delete Article by ID
   fastify.delete(

@@ -2,6 +2,7 @@ import { FastifyRequest, FastifyReply } from 'fastify';
 import { PrismaClient } from "@prisma/client";
 import { ArticleStatus, PrismaError, SortOrder } from '../types';
 import { HTTPStatus } from '../types';
+import { equal } from 'assert';
 
 const prisma: PrismaClient = new PrismaClient();
 
@@ -16,13 +17,16 @@ export async function getArticles(req: FastifyRequest, res: FastifyReply) {
                 topic: true
             },
             where: {
-                status: {
-                    not: 9
-                },
-                OR: [
+                AND: [
                     {
-                        status: status !== undefined ? Number(status) : undefined,
+                        status: {
+                            not: 9
+                        }
                     },
+                    {
+                        status: status !== undefined ? Number(status) : undefined
+                    }],
+                OR: [
                     {
                         topic: {
                             some: {
@@ -149,6 +153,35 @@ export async function updateArticle(req: FastifyRequest, res: FastifyReply) {
             message: `Article with ID ${+id} successfully updated.`,
             data: article
         });
+
+    } catch (err: any) {
+        if (err.code === PrismaError.RECORD_NOT_FOUND) {
+            err.statusCode = 404;
+            err.message = `Article with ID ${+id} not found.`;
+        }
+        if (!err.statusCode) {
+            err.statusCode = HTTPStatus.INTERNAL_SERVER_ERROR;
+        }
+        res.status(err.statusCode).send(err);
+    }
+}
+
+export async function publishArticle(req: FastifyRequest, res: FastifyReply) {
+    const params = req.params as any;
+    const id = params["id"];
+
+    try {
+        const article = await prisma.article.update({
+            data: {
+                status: 1
+            },
+            where: {
+                id: +id
+            }
+        })
+        res.status(HTTPStatus.OK).send({
+            message: `Article with ID ${+id} successfully published.`
+        })
 
     } catch (err: any) {
         if (err.code === PrismaError.RECORD_NOT_FOUND) {
