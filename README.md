@@ -1,4 +1,4 @@
-# Zero One Technology's Skills Tests - Backend Product Engineer
+# Fastify
 # REST API for News and Topic Management
 
 ## Installation setups
